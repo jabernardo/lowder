@@ -63,3 +63,5 @@ class Lowder:
         
         x.join()
         y.join()
+        
+        return self.__result
