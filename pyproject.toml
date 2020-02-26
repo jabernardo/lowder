@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lowder"
-version = "0.3.0"
+version = "0.4.0"
 description = "CLI Loader"
 authors = ["John Aldrich Bernardo"]
 license = "MIT"

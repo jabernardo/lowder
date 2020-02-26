@@ -33,19 +33,27 @@ class Lowder:
     __run = True
     __loader_screen = LOADERS['default']
     __result = None
+    __loading_message = ""
     
     def __init__(self):
         super().__init__()
         
-    def stop(self, message):
+    def stop(self, message = None):
         self.__run = False
         time.sleep(1)
-        print(message)
+        cols = len(self.__loading_message)
+        
+        if not message is None:
+            print(f"\x1b[${cols}D\x1b[K{message}")
+        else:
+            print(f"\x1b[${cols}D\x1b[K{message}", end="\r")
         
     def __loader(self, message):
         while self.__run:
             for char in self.__loader_screen['frames']:
-                print(f"{char} {message}", end="\r")
+                cols = len(message)
+                self.__loading_message = f"\x1b[${cols}D\x1b[K{char} {message}"
+                print(self.__loading_message, end="\r")
                 time.sleep(self.__loader_screen['interval'])
             
     def __call(self, callback):
