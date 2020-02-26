@@ -40,7 +40,6 @@ class Lowder:
         
     def stop(self, message = None):
         self.__run = False
-        time.sleep(1)
         cols = len(self.__loading_message)
         
         if not message is None:
@@ -53,7 +52,10 @@ class Lowder:
             for char in self.__loader_screen['frames']:
                 cols = len(message)
                 self.__loading_message = f"\x1b[${cols}D\x1b[K{char} {message}"
-                print(self.__loading_message, end="\r")
+                
+                if self.__run:
+                    print(self.__loading_message, end="\r")
+                    
                 time.sleep(self.__loader_screen['interval'])
             
     def __call(self, callback):
