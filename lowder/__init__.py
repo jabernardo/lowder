@@ -46,7 +46,7 @@ class Lowder:
         if not message is None:
             print(f"\x1b[${cols}D\x1b[K{message}")
         else:
-            print(f"\x1b[${cols}D\x1b[K{message}", end="\r")
+            print(f"\x1b[${cols}D\x1b[K", end="\r")
         
     def __loader(self, message):
         while self.__run:
