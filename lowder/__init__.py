@@ -32,6 +32,7 @@ LOADERS = {
 class Lowder:
     __run = True
     __loader_screen = LOADERS['default']
+    __result = None
     
     def __init__(self):
         super().__init__()
@@ -47,12 +48,14 @@ class Lowder:
                 print(f"{char} {message}", end="\r")
                 time.sleep(self.__loader_screen['interval'])
             
+    def __call(self, callback):
+        self.__result = callback()
     
     def start(self, message, callback, loader = LOADERS['default']):
         self.__loader_screen = loader
         self.__run = True
         
-        y = threading.Thread(target=callback, args=())
+        y = threading.Thread(target=self.__call, args=(callback,))
         y.start()
         
         x = threading.Thread(target=self.__loader, args=(message,))
